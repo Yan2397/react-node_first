@@ -1,0 +1,594 @@
+<style>
+    *{
+        font-family: tahoma;
+    }
+    code {
+    font-size: 87.5%;
+    color: #0c0c0c!important;
+    word-wrap: break-word;
+    background: #e4e4e4!important;
+}
+
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<div class="container">
+    <p>Սոցիալական ցանցի մշակում: <br>
+    <b class="text-danger">JavaScript մասնագիտացված կուրս</b></p>
+    <p>Հարգելի՛ ուսանող, front հատվածից՝ <b>React, Angular կամ Vue</b> համակարգերում <br>
+    բոլոր տեսակի հարցումները ուղարկում եք http://localhost:5000 սերվերին</p>
+    <p>Ստորև ներկայացված են բոլոր հնարավոր հարցումները, որոնք կարելի է իրականացնել</p>
+    <p>
+        <p><b>հարցման տեսակ - </b> GET կամ POST</p>
+        <b>հասցե - </b> օրինակ՝ <b>/login</b> նշանակում է հարցումը պետք է գնա <code>http://localhost:5000/login</code>
+        <p><b>մուտքային պարամետրեր</b> - օրինակ {login:'ok'} նշանակում է պետք է ուղարկել login պարամետրեր</p>
+        <p><b>ելք</b> օրինակ՝ {status:'ok'}  նշանակում է ելքում կստանանք {status} օբյեկտը</p>
+        <p>
+            Այսպիսով
+            <pre>
+                <code>
+                axios.post('http://localhost:5000/login', {login:'inch vor mi ban'})
+                    .then(r=>{
+                        console.log(r.data);// {status...}
+                    })
+                </code>
+            </pre>
+        </p>
+    </p>
+    <table class="table table-bordered table-dark">
+        <tr class="text-center">
+            <th>նշումներ</th>
+            <th>տեսակ</th>
+            <th>հասցե</th>
+            <th>Նշանակություն</th>
+
+            <th>մուտքային պարամետրեր</th>
+            <th>ելք</th>
+        </tr>
+        <tr class="text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /signup
+            </td>
+            <td>
+                նախատեսված է գրանցվող մարդու տվյալները բազա ուղարկելու համար
+            </td>
+            <td>
+                <code>{name,surname, login, password}</code>
+            </td>
+            <td>
+                <code>{status:'ok'} կամ {error:'message'}</code>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /login
+            </td>
+            <td>
+                նախատեսված է լոգին լինելու համար: 
+            </td>
+            <td>
+                <code>{login, password}</code>
+            </td>
+            <td>
+               եթե նման մարդ չկա, ապա Error, կամ {token} </code>
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /getUserByToken
+            </td>
+            <td>
+                Տրամադրում է User-ի տվյլաները՝ ըստ token -ի
+            </td>
+            <td>
+                <code>{token}</code>
+            </td>
+            <td>
+               {error:""} եթե նման մարդ չկա <br>
+               user -ի տվյալները, եթե token -ը ակտիվ է և ճիշտ
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /search
+            </td>
+            <td>
+                Նախատեսված է մարդկանց որոնելու համար
+            </td>
+            <td>
+                <code>{token, text}</code>
+            </td>
+            <td>
+              users:[] որի մեջ կա՝ 
+              {name, surname, photo, ինչպես նաև areWeFriends, isRequestSent} դաշտերը
+            </td>
+        </tr>
+        <tr class="text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td>
+            <td>/getUserById</td>
+            <td>վերադարձնում է User -ի տվյալներն ըստ Id -ի,լոգին եղած User -ի token</td>
+            <td>{id,token}</td>
+            <td>{ mardu tvyalner@ {}}</td>
+        </tr>
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /addFriend
+            </td>
+            <td>
+                Նախատեսված է տվյալ մարդուն ընկերության հայտ ուղարկելու համար
+            </td>
+            <td>
+                <code>{լոգին եղած User -ի token, այն user -ի id-ին ում հայտ ենք ուղարկում}
+
+                    {token,id}
+                </code>
+            </td>
+            <td>
+                 {status:"ok"}
+            </td>
+        </tr>
+        
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /getMyRequests
+            </td>
+            <td>
+                Նախատեսված է լոգին եղած մարդուն ուղարկված ընկերության հայտերը ստանալու համար
+            </td>
+            <td>
+                <code>
+                    {token}
+                </code>
+            </td>
+            <td>
+                 {users:[]}
+            </td>
+        </tr>
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /getMyFriends
+            </td>
+            <td>
+                Նախատեսված է լոգին եղած մարդու ընկերների ցուցակը ստանալու համար
+            </td>
+            <td>
+                <code>
+                    {token}
+                </code>
+            </td>
+            <td>
+                 {users:[]}
+            </td>
+        </tr>
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /acceptRequest
+            </td>
+            <td>
+                Նախատեսված է հայտը հաստատելու համար
+            </td>
+            <td>
+                <code>
+                    {token, id}
+                    <br>
+                    լոգին եղած user -ի token<br>
+                    request ուղարկողի id
+                </code>
+            </td>
+            <td>
+                 {status:"OK"}
+            </td>
+        </tr>
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /declineRequest
+            </td>
+            <td>
+                Նախատեսված է հայտը մերժելու համար
+            </td>
+            <td>
+                <code>
+                    {token, id}
+                    <br>
+                    լոգին եղած user -ի token<br>
+                    request ուղարկողի id
+                </code>
+            </td>
+            <td>
+                 {status:"OK"}
+            </td>
+        </tr>
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /cancelRequest
+            </td>
+            <td>
+                Նախատեսված է ուղարկված հայտը դադարեցնելու համար
+            </td>
+            <td>
+                <code>
+                    {token, id}
+                    <br>
+                    լոգին եղած user -ի token<br>
+                    ուղարկված մարդու id
+                </code>
+            </td>
+            <td>
+                 {status:"OK"}
+            </td>
+        </tr>
+        <tr class="text-center bg-warning text-dark">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /unfriend
+            </td>
+            <td>
+                Նախատեսված է ընկերոջը ջնջելու համար
+            </td>
+            <td>
+                <code>
+                    {token, id}
+                    <br>
+                    լոգին եղած user -ի token<br>
+                    ընկերոջ id
+                </code>
+            </td>
+            <td>
+                 {status:"OK"}
+            </td>
+        </tr>
+        <tr class="text-center bg-info text-white">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /updateLogin
+            </td>
+            <td>
+                Նախատեսված է user-ի լոգինը փոխելու համար
+            </td>
+            <td>
+                <code>
+                    {token, text}
+                    <br>
+                    լոգին եղած user -ի token<br>
+                    Նոր լոգինի տեքստը
+                </code>
+            </td>
+            <td>
+                 {status:"OK"} կամ {error}
+            </td>
+        </tr>
+        <tr class="text-center bg-info text-white">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                /updatePassword
+            </td>
+            <td>
+                Նախատեսված է user-ի ծածկագիրը փոխելու համար
+            </td>
+            <td>
+                <code>
+                    {token, text}
+                    <br>
+                    լոգին եղած user -ի token<br>
+                    Նոր ծածկագրի տեքստը
+                </code>
+            </td>
+            <td>
+                 {status:"OK"} կամ {error}
+            </td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST/FormData</td> 
+            <td>/uploadPic</td>
+            <td>profile -ի նկար upload անելու համար</td>
+            <td>{avatar:FILE, token}</td>
+            <td>{status:"ok"} կամ {error} </td>
+        </tr>
+
+<tr class="bg-white text-dark text-center">
+    <td>
+        <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+        <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+    </td>
+    <td>POST/FormData</td> 
+    <td>/addBackPhoto</td>
+    <td>Background -ի նկար upload անելու համար</td>
+    <td>{back:FILE, token}</td>
+    <td>{status:"EKAV"} կամ {error} </td>
+</tr>
+
+
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/addPost</td>
+            <td>post-image ավելացնելու համար</td>
+            <td>{avatar:FILE, token, text}</td>
+            <td>{status:"ok"} կամ {error} </td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/removePost</td>
+            <td>post-ը ջնջելու համար</td>
+            <td>{post_id, token}</td>
+            <td>{status:"ok"} կամ {error} </td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/getMyPosts</td>
+            <td>լոգին եղած user -ի post-երը ցուցադրելու համար</td>
+            <td>{token}</td>
+            <td>data</td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/like</td>
+            <td>որևէ post լայքելու/դիզլայքելու համար</td>
+            <td>{token, post_id}</td>
+            <td>{status:'ok'}</td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/getFriendsPosts</td>
+            <td>ընկերների փոստերը ստանալու համար</td>
+            <td>{token}</td>
+            <td>data</td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST/FORM-DATA</td> 
+            <td>/addPhoto</td>
+            <td>Ալբոմին նկար ավելացնելու համար</td>
+            <td>{token, avatar,text}</td>
+            <td>{status:'ok'}</td>
+        </tr>
+<!-- 
+        <tr class="bg-white text-dark text-center">
+            <td>POST/FORM-DATA</td> 
+            <td>/addPhoto</td>
+            <td>Ալբոմին նկար ավելացնելու համար</td>
+            <td>{token, avatar,text}</td>
+            <td>{status:'ok'}</td>
+        </tr> -->
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/getMyPhotos</td>
+            <td>user -ի ալբոմը ստանալու համար</td>
+            <td>{token}</td>
+            <td>{status:'ok'}</td>
+        </tr>
+        <tr class="bg-white text-dark text-center">
+            <td>
+                <img src='http://localhost:5000/accept.png' width="40px" height="40px"/>
+                <!-- <img src='http://localhost:5000/reject.png' width="40px" height="40px"/> -->
+            </td>
+            <td>POST</td> 
+            <td>/changePhotoStatus</td>
+            <td>Նկարի հասանելիության մակարդակը փոխելու համար
+                {token, privacy, id}
+
+                <br>
+                <p>
+                    privacy  ={0,1,2} => 0 - public; 1 -> private 2->protected
+                </p>
+
+            </td>
+            <td>{token, avatar,text}</td>
+            <td>{status:'ok'}</td>
+        </tr>
+        
+
+        <tr class="text-center bg-danger text-white">
+            <td class="mark">
+                <!-- <img src='http://localhost:5000/accept.png' width="40px" height="40px"/> -->
+                <img src='http://localhost:5000/reject.png' width="40px" height="40px"/>
+            </td>
+            <td>
+                emit
+            </td>
+            <td>
+                joined
+            </td>
+            <td>
+               Messenger -ի էջը բացվելիս ուղարկում ենք լոգին եղած User -ի id -ին
+            </td>
+<td>
+
+            </td>
+            <td>
+                BACK սովորելուց հետո կխզզարեմ 
+            </td>
+        </tr>
+        <tr class="text-center bg-danger text-white">
+            <td class="mark">
+                <!-- <img src='http://localhost:5000/accept.png' width="40px" height="40px"/> -->
+                <img src='http://localhost:5000/reject.png' width="40px" height="40px"/>
+            </td>
+
+            <td>
+                emit
+            </td>
+            <td>
+                newMessage
+            </td>
+            <td>
+                 նոր նամակ ուղարկելուց {from, to, text}
+            </td>
+            <td>
+
+            </td>
+            <td>
+                BACK սովորելուց հետո կխզզարեմ 
+            </td>
+        </tr>
+     
+        <tr class="text-center bg-danger text-white">
+            <td class="mark">
+                <!-- <img src='http://localhost:5000/accept.png' width="40px" height="40px"/> -->
+                <img src='http://localhost:5000/reject.png' width="40px" height="40px"/>
+            </td>
+
+            <td>
+                emit
+            </td>
+            <td>
+                startConversation
+            </td>
+            <td>
+                 chat -ը սկսելուց {me:լոգին եղածի id -ին, with: մյուս ընկերոջը}
+            </td>
+            <td>
+
+                </td>
+            <td>
+                BACK սովորելուց հետո կխզզարեմ 
+            </td>
+        </tr>
+       
+        <tr class="text-center bg-danger text-white">
+            <td class="mark"> 
+                <!-- <img src='http://localhost:5000/accept.png' width="40px" height="40px"/> -->
+                <img src='http://localhost:5000/reject.png' width="40px" height="40px"/>
+            </td>
+
+            <td>
+                on
+            </td>
+            <td>
+                newMessages
+            </td>
+            <td>
+                 նոր նամակներ ստանալուց
+            </td>
+<td>
+
+</td>
+            <td>
+                BACK սովորելուց հետո կխզզարեմ 
+            </td>
+        </tr>
+
+
+    </table>
+</div>
